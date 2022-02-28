@@ -9,8 +9,6 @@ export function splitDays(logs: Map<number, string>): Map<number, Map<number, st
 		days.get(day).set(millis, ip);
 	});
 
-	console.log(days);
-
 	return days;
 }
 

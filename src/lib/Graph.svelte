@@ -3,8 +3,6 @@
 
 	export let logs: Map<number, string>;
 
-	$: console.log(logs);
-
 	let tooltipText = '';
 	let tooltipPosition = {
 		x: 0,

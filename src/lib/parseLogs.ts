@@ -22,7 +22,6 @@ export function parseLogs(logs: string): Map<number, string> {
 			logsMap.set(date.getTime(), ip);
 		}
 	});
-	console.log({ logsMap });
 
 	return logsMap;
 }
