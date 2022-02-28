@@ -22,11 +22,13 @@ export function parseLogs(logs: string): Map<number, string> {
 			logsMap.set(date.getTime(), ip);
 		}
 	});
+	console.log({ logsMap });
+
 	return logsMap;
 }
 
 function extractDate(line: string) {
-	const dateRegex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}/;
+	const dateRegex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+\+\d+:\d+/;
 	const match = line.match(dateRegex);
 	if (match) {
 		const date = new Date(match[0]);
