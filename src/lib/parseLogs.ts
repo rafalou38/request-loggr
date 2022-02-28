@@ -14,6 +14,10 @@ export function parseLogs(logs: string): Map<number, string> {
 		if (path === '/ping') {
 			const date = extractDate(line);
 			date.setSeconds(0);
+			date.setMilliseconds(0);
+
+			// Keep only the date that happen at the good moment
+			if (date.getMinutes() % 15 != 0) return;
 			const ip = extractIp(line);
 			logsMap.set(date.getTime(), ip);
 		}
