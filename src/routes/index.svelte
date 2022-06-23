@@ -17,7 +17,7 @@
 				headers: {
 					Accept: 'application/vnd.heroku+json; version=3',
 					'Content-Type': 'application/json',
-					Authorization: 'Bearer 4472e759-98f8-4a6a-b3f2-4f4949420f00'
+					Authorization: 'Bearer a86f3f8c-57f7-4758-a483-f7bb33cea5b8'
 				},
 				body: '{"lines":5000}'
 			}
