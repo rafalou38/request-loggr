@@ -11,8 +11,7 @@
 	let tooltipVisible = false;
 
 	// handle tooltip
-	function mouseMove(e: MouseEvent & { currentTarget: EventTarget & HTMLTableElement }) {
-		const target = e.target as HTMLDivElement;
+	function mouseEnter(target: HTMLDivElement) {
 		const millis = target.dataset?.['millis'];
 		const ip = target.dataset?.['ip'];
 		if (!target || !millis) return;
@@ -27,6 +26,13 @@
 		tooltipVisible = true;
 	}
 
+	function mouseLeave() {
+		tooltipPosition = {
+			x: 0,
+			y: 0
+		};
+	}
+
 	// color representation of the ip
 	function color(ip: string) {
 		const rgb = ip
@@ -39,14 +45,16 @@
 </script>
 
 <!-- tailwindcss tooltip -->
-<div
-	class="absolute bg-blue-900 rounded p-2"
-	style="left: {tooltipPosition.x}px; top: {tooltipPosition.y}px;"
->
-	{@html tooltipText}
-</div>
+{#if tooltipPosition.x + tooltipPosition.y != 0}
+	<div
+		class="absolute bg-blue-900 rounded p-2"
+		style="left: {tooltipPosition.x}px; top: {tooltipPosition.y}px;"
+	>
+		{@html tooltipText}
+	</div>
+{/if}
 
-<table class="text-center w-min" on:mousemove={mouseMove}>
+<table class="text-center w-min">
 	<tr>
 		<th>DATE</th>
 		<th>CONNECTIONS</th>
@@ -64,6 +72,10 @@
 						class:bg-gray-600={!ip}
 						data-millis={millis}
 						data-ip={ip}
+						on:touchstart={(e) => mouseEnter(e.currentTarget)}
+						on:mouseenter={(e) => mouseEnter(e.currentTarget)}
+						on:mouseleave={mouseEnter}
+						on:mouseleave={mouseLeave}
 					/>
 				{/each}
 			</td>
